@@ -2,7 +2,7 @@
 function (nloc = 2) 
 {
     if (!exists("genotypesNames")) {
-        data(genotypesNames, package = "noia")
+        genotypesNames <- NULL; rm(genotypesNames);data(genotypesNames, package = "noia")
     }
     names <- genotypesNames[1:3]
     if (nloc > 1) {

@@ -2,7 +2,7 @@
 function (name) 
 {
     if (!exists("genotypesNames")) {
-        data(genotypesNames, package = "noia")
+        genotypesNames <- NULL; rm(genotypesNames); data(genotypesNames, package = "noia")
     }
     ans <- NULL
     for (n in name) {

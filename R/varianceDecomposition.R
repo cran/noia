@@ -2,7 +2,7 @@
 function (obj) 
 {
     if (!exists("effectsNames")) {
-        data(effectsNames, package = "noia")
+        effectsNames <- NULL; rm(effectsNames); data(effectsNames, package = "noia")
     }
     if (class(obj) == "noia.linear" || class(obj) == "noia.multilinear") {
         n <- names(obj$variances)

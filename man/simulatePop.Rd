@@ -40,7 +40,7 @@ Le Rouzic A, Alvarez-Castro JM. (2008). Estimation of genetic effects and
 	genotype-phenotype maps. Evolutionary Bioinformatics, 4. 
 }
 
-\author{ Arnaud Le Rouzic <a.p.s.lerouzic@bio.uio.no} }
+\author{ Arnaud Le Rouzic <a.p.s.lerouzic@bio.uio.no> } 
 
 \seealso{ \code{\link{GPmap}},   \code{\link{genNames}} }
 

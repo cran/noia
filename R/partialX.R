@@ -2,7 +2,7 @@
 function (genZ, reference = "F2", effect) 
 {
     if (!exists("effectsNames")) {
-        data(effectsNames, package = "noia")
+        effectsNames <- NULL; rm(effectsNames); data(effectsNames, package = "noia")
     }
     loci <- which(strsplit(effect, "")[[1]] != effectsNames[1])
     if (length(loci) == 0) {

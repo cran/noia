@@ -10,9 +10,9 @@
   \code{\link{multilinearRegression}}.
 }
 \usage{
-print.noia.linear(x, ...)
-print.noia.multilinear(x, ...)
-print.noia.common(x, ...)
+\method{print}{noia.linear}(x, ...)
+\method{print}{noia.multilinear}(x, ...)
+\method{print}{noia.common}(x, ...)
 }
 
 \arguments{

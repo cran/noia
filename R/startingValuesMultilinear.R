@@ -5,7 +5,7 @@ function (noia.multilinear, max.level = 2, max.dom = 2, e.unique = FALSE)
         stop("Object of class \"noia.multilinear\" expected\n")
     }
     if (!exists("effectsNames")) {
-        data(effectsNames, package = "noia")
+        effectsNames <- NULL; rm(effectsNames); data(effectsNames, package = "noia")
     }
     a <- effectsNames[2]
     d <- effectsNames[3]

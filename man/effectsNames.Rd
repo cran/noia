@@ -76,7 +76,7 @@ Le Rouzic A, Alvarez-Castro JM. (2008). Estimation of genetic effects and
 effectsNamesGeneral(3)
 effectsSelect(nloc=3, max.level=1)
   }
-}
+
 
 \keyword{ internal }
 \keyword{ character }

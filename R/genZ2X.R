@@ -2,10 +2,10 @@
 function (genZ, reference = "F2", max.level = NULL, max.dom = NULL) 
 {
     if (!exists("genotypesNames")) {
-        data(genotypesNames, package = "noia")
+        genotypesNames <- NULL; rm(genotypesNames);data(genotypesNames, package = "noia")
     }
     if (!exists("effectsNames")) {
-        data(effectsNames, package = "noia")
+        effectsNames <- NULL; rm(effectsNames); data(effectsNames, package = "noia")
     }
     ans <- NULL
     eff <- effectsNamesGeneral(nloc = ncol(genZ)/3, max.level = max.level, 

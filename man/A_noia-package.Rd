@@ -24,16 +24,19 @@ Date: \tab 2008-07-03\cr
 License: \tab GPL-2\cr
 }
 
-\item{Data set:}{ The user must provide (i) The vector of phenotypes 
+\strong{Data set}: The user must provide (i) The vector of phenotypes 
 	of all individuals measured in 
 	the population, and (ii) The matrix of the genotypes. There are two input 
-	formats for the genotype, see \code{\link{linearRegression}}}
-\item{Regression functions:}{ \code{\link{linearRegression}} and 
-	\code{\link{multilinearRegression}}}
-\item{Change of reference:}{ \code{\link{geneticEffects}}}
-\item{Genotype-to-phenotype map:}{ \code{\link{GPmap}}}
-\item{Decomposition of genetic variance:}{ \code{\link{varianceDecomposition}}}
+	formats for the genotype, see \code{\link{linearRegression}}.
+	
+\strong{Regression functions}: \code{\link{linearRegression}} and 
+	\code{\link{multilinearRegression}}.
+	
+\strong{Change of reference}: \code{\link{geneticEffects}}.
 
+\strong{Genotype-to-phenotype map}: \code{\link{GPmap}}.
+
+\strong{Decomposition of genetic variance}: \code{\link{varianceDecomposition}}.
 }
 
 \author{
