@@ -1,32 +1,32 @@
 `Sloc` <-
-function (type = "F2", i = NULL, genZ = NULL) 
+function (reference = "F2", i = NULL, genZ = NULL) 
 {
     ans <- NULL
-    if (type == "F2") {
+    if (reference == "F2") {
         ans <- matrix(c(1, -1, -0.5, 1, 0, 0.5, 1, 1, -0.5), 
             byrow = TRUE, ncol = 3)
     }
-    else if (type == "P1") {
+    else if (reference == "P1") {
         ans <- matrix(c(1, 0, 0, 1, 1, 1, 1, 2, 0), byrow = TRUE, 
             ncol = 3)
     }
-    else if (type == "P2") {
+    else if (reference == "P2") {
         ans <- matrix(c(1, -2, 0, 1, -1, 1, 1, 0, 0), byrow = TRUE, 
             ncol = 3)
     }
-    else if (type == "F1") {
+    else if (reference == "F1") {
         ans <- matrix(c(1, -1, -1, 1, 0, 0, 1, 1, -1), byrow = TRUE, 
             ncol = 3)
     }
-    else if (type == "Finf") {
+    else if (reference == "Finf") {
         ans <- matrix(c(1, -1, 0, 1, 0, 1, 1, 1, 0), byrow = TRUE, 
             ncol = 3)
     }
-    else if (type == "UWR") {
+    else if (reference == "UWR") {
         ans <- matrix(c(1, -1, -1/3, 1, 0, 2/3, 1, 1, -1/3), 
             byrow = TRUE, ncol = 3)
     }
-    else if (type == "noia") {
+    else if (reference == "noia") {
         if (is.null(genZ) || is.null(i)) {
             stop("zmat is necessary for statistical model computation")
         }
@@ -37,7 +37,7 @@ function (type = "F2", i = NULL, genZ = NULL)
             1, 2 - f[2] - 2 * f[3], (-2 * f[1] * f[2])/(f[1] + 
                 f[3] - (f[1] - f[3])^2)), byrow = TRUE, ncol = 3)
     }
-    else if (type == "G2A") {
+    else if (reference == "G2A") {
         if (is.null(genZ) || is.null(i)) {
             stop("zmat is necessary for statistical model computation")
         }
@@ -48,7 +48,7 @@ function (type = "F2", i = NULL, genZ = NULL)
             p * p), byrow = TRUE, ncol = 3)
     }
     else {
-        stop("unknown type ", type, ".")
+        stop("unknown reference ", reference, ".")
     }
     return(ans)
 }

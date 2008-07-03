@@ -5,22 +5,32 @@
 \alias{genZ2freq}
 \alias{genZ2S}
 \alias{genZ2Z}
+\alias{genZ2ZS}
+\alias{genZ2X}
+\alias{checkgenZ}
 \alias{Z2freq}
+\alias{partialX}
 \alias{Sloc}
 
 \title{ Matrix algebra in the NOIA framework. }
 \description{
   These functions perform the matrix computation required for the computation
-  of geneticEffects and Genotype-to-Phenotype mapping. 
+  of genetic effects and Genotype-to-Phenotype mapping. 
 }
 \usage{
 gen2Z(gen)
 gen2genZ(gen)
 genZ2freq(genZ)
-genZ2S(type="F2", genZ=NULL, nloc=NULL)
+genZ2S(genZ=NULL, reference="F2", nloc=NULL, max.level=NULL, 
+	max.dom=NULL)
 genZ2Z(genZ)
+genZ2ZS(genZ, reference="F2", max.level=NULL, max.dom=NULL, 
+	threshold=0)
+genZ2X(genZ, reference="F2", max.level=NULL, max.dom=NULL)
+checkgenZ(genZ, tol=0.0001)
 Z2freq(Z)
-Sloc(type="F2", i=NULL, genZ=NULL)
+partialX(genZ, reference="F2", effect)
+Sloc(reference="F2", i=NULL, genZ=NULL)
 }
 
 \arguments{
@@ -29,12 +39,18 @@ Sloc(type="F2", i=NULL, genZ=NULL)
   \item{genZ}{ The matrix of genotypic probabilities, 3 columns per locus (one
   for the probability of each genotype). The sum of probabilities must be 1, 
   and missing data are not allowed. }
-  \item{type}{ The type of the population. \code{"F2"}, \code{"F1"}, 
+  \item{reference}{ The reference of the population. \code{"F2"}, \code{"F1"}, 
   \code{"Finf"}. \code{"P1"}, \code{"P2}, \code{"G2A"}, \code{"UWR"} and
   \code{"noia"} are possible. Default is \code{"F2"}. }
   \item{nloc}{ Number of loci. }
+  \item{max.level}{ Maximum level of interactions. }
+  \item{max.dom}{ Maximum level for dominance effects. }
+  \item{threshold}{ Frequency threshold from which a genotype is taken into account. Values other than 0 might bias the results.} 
   \item{Z}{ A matrix reflecting the genotype of the corresponding observed 
   phenotypes, as defined in Alvarez-Castro and Carlborg 2007. }
+  \item{tol}{A tolerance factor, featuring how much the sum of genotypic 
+  frequencies can be different from 1.}
+  \item{effect}{ The name of a genetic effect (such as \code{".ad"}). }
   \item{i}{ Index of the locus. }
 }
 \details{
@@ -49,10 +65,14 @@ Sloc(type="F2", i=NULL, genZ=NULL)
   frequency-dependent (\code{"G2A"} and \code{"noia"}), and the \code{genZ} 
   matrix must be provided. For the others, only the number of loci is 
   necessary. }
-  \item{\code{genZ2Z}}{ Conmputes the \code{Z} matrix from the genotypic 
+  \item{\code{genZ2Z}}{ Computes the \code{Z} matrix from the genotypic 
   probabilities. See Alvarez-Castro and Carlborg 2007 for more details. }
+  \item{\code{genZ2ZS}}{ Computes \code{Z} and \code{S} matrices at the same time. This is highly efficient when many genotypes are not represented in the dataset. The function returns a list of two elements \code{"zmat"} and \code{"smat"}.}
+  \item{\code{genZ2X}}{ Computes the product of \code{Z} and \code{S} matrices without building them. This is very efficient when considering only low-level interactions. }
+  \item{\code{checkgenZ}}{ Checks the structure of the \code{genZ} matrix. } 
   \item{\code{Z2freq}}{ Computes the multi-locus genotypic frequency over all genotypic
   combinations. }
+  \item{\code{partialX}}{ Computes the product of \code{Z} and \code{S} matrices, keeping \code{Z} and \code{S} as small as possible considering a given effect \code{effect}. }
   \item{\code{Sloc}}{ Provides a 3x3 \code{S} matrix, corresponding to one locus. 
   Frequency-dependent reference points will require the \code{genZ} matrix 
   and the index of the locus. }
@@ -64,7 +84,7 @@ Alvarez-Castro JM, Carlborg O. (2007). A unified model for functional
 	loci analysis. Genetics 176(2):1151-1167.
 	
 Le Rouzic A, Alvarez-Castro JM. (2008). Estimation of genetic effects and
-	genotype-phenotype maps. Evolutionary Bioinformatics, in press. 
+	genotype-phenotype maps. Evolutionary Bioinformatics, 4. 
 }
 \author{ Arnaud Le Rouzic <a.p.s.lerouzic@bio.uio.no> }
 
@@ -80,5 +100,5 @@ gen <- pop[2:3]
 genZ <- gen2genZ(gen)
 Z <- genZ2Z(genZ)
 }
-\keyword{ manip }
+\keyword{ internal }
 

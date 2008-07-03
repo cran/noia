@@ -75,7 +75,7 @@ function (noia.multilinear)
             }
         }
     }
-    ans.effects <- ans.effects[colnames(noia.multilinear$S)]
-    ans.stderr <- ans.stderr[colnames(noia.multilinear$S)]
+    ans.effects <- ans.effects[colnames(noia.multilinear$smat)]
+    ans.stderr <- ans.stderr[colnames(noia.multilinear$smat)]
     return(cbind(ans.effects, ans.stderr))
 }

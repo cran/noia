@@ -1,5 +1,6 @@
 `genZ2S` <-
-function (type = "F2", genZ = NULL, nloc = NULL) 
+function (genZ = NULL, reference = "F2", nloc = NULL, max.level = NULL, 
+    max.dom = NULL) 
 {
     if (is.null(nloc)) {
         if (is.null(genZ)) {
@@ -9,9 +10,20 @@ function (type = "F2", genZ = NULL, nloc = NULL)
     }
     ans <- 1
     for (i in 1:nloc) {
-        ans <- kronecker(Sloc(type, i, genZ), ans)
+        eff <- colnames(ans)
+        ans <- kronecker(Sloc(reference = reference, i, genZ), 
+            ans)
+        if (is.null(eff)) {
+            colnames(ans) <- effectsNamesGeneral(1)
+        }
+        else {
+            colnames(ans) <- strrev(kronecker(effectsNamesGeneral(1), 
+                strrev(eff), "paste", sep = ""))
+        }
+        if (!(is.null(max.level) && is.null(max.dom))) 
+            ans <- ans[, effectsSelect(nloc = nloc, max.level = max.level, 
+                max.dom = max.dom, effects = colnames(ans))]
     }
-    colnames(ans) <- effectsNamesGeneral(nloc)
     rownames(ans) <- genNames(nloc)
     return(ans)
 }

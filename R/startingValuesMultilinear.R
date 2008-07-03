@@ -31,8 +31,14 @@ function (noia.multilinear, max.level = 2, max.dom = 2, e.unique = FALSE)
         }
         for (l1 in 1:(nloc - 1)) {
             for (l2 in (l1 + 1):nloc) {
-                ans[[paste("e", l1, l2, sep = "")]] <- effects[effNames(c(e, 
-                  e), c(l1, l2), nloc)]
+                if (e.unique) {
+                  ans[["ee"]] <- ans[["ee"]] + effects[effNames(c(e, 
+                    e), c(l1, l2), nloc)]/(nloc * (nloc - 1)/2)
+                }
+                else {
+                  ans[[paste("e", l1, l2, sep = "")]] <- effects[effNames(c(e, 
+                    e), c(l1, l2), nloc)]
+                }
             }
         }
     }

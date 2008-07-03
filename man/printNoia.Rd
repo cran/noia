@@ -21,13 +21,13 @@ print.noia.common(x, ...)
 }
 \details{
   The \code{print} method being actually very similar for the linear and 
-  multilinearRegressions, both call the common method \code{print.noia.common}. 
+  multilinear regressions, both call the common method \code{print.noia.common}. 
 }
 
 \references{ 
 	
 Le Rouzic A, Alvarez-Castro JM. (2008). Estimation of genetic effects and
-	genotype-phenotype maps. Evolutionary Bioinformatics, in press. 
+	genotype-phenotype maps. Evolutionary Bioinformatics, 4. 
 }
 \author{ Arnaud Le Rouzic <a.p.s.lerouzic@bio.uio.no> }
 

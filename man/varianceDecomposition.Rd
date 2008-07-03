@@ -19,7 +19,7 @@ varianceDecomposition(obj)
   \code{\link{linearRegression}}. }
 }
 \details{
-  The details of the varianceDecomposition are provided for all levels of
+  The details of the variance decomposition are provided for all levels of
   interaction: Var(A) and Var(D) for marginal effects, Var(AA), Var(AD) and Var(DD) 
   for 2nd order interactions, etc.
 }
@@ -36,7 +36,7 @@ Fisher RA. (1918). The correlation between relatives on the supposition of
 	Mendelian inheritance. Thans. Roy. Soc. Edinburgh 52:339-433. 
 	
 Le Rouzic A, Alvarez-Castro JM. (2008). Estimation of genetic effects and
-	genotype-phenotype maps. Evolutionary Bioinformatics, in press. 
+	genotype-phenotype maps. Evolutionary Bioinformatics, 4. 
 
 Lynch M, Walsh B (1998) Genetics and Analysis of Quantitative Traits. 
 Sunderland, MA; Sinauer Associates. 
@@ -58,5 +58,6 @@ linear <- linearRegression(phen=pop$phen, gen=cbind(pop$Loc1, pop$Loc2))
 varianceDecomposition(linear)
 }
 
+\keyword{ models }
 \keyword{ regression }
 

@@ -6,12 +6,14 @@ function (x, ...)
         digits = 5), " max: ", format(max(x$phen), digits = 5), 
         " mean: ", format(mean(x$phen), digits = 5), "\n"))
     cat("Genotype:\n")
-    cat(paste("\tn=", nrow(x$genL), ",", ncol(x$genL), "loci\n"))
-    for (i in colnames(x$genL)) {
-        cat("\t\t", i, ":  \tn=", (length(as.character(x$genL[, 
-            i])) - sum(as.character(x$genL[, i]) == "NA")), "\t", 
-            paste(levels(factor(as.character(x$genL[, i]), exclude = c("NA", 
-                "<NA>"))), collapse = "  "), "\n")
+    cat(paste("\tn=", nrow(x$genZ), ",", ncol(x$genZ)/3, "loci\n"))
+    for (l in 1:(ncol(x$genZ)/3)) {
+        cat("\t\tLocus ", l, "\t\t1: ", format(sum(x$genZ[, 3 * 
+            l - 2])/(nrow(x$genZ)), digits = 3, nsmall = 3), 
+            "\t2: ", format(sum(x$genZ[, 3 * l - 1])/(nrow(x$genZ)), 
+                digits = 3, nsmall = 3), "\t3: ", format(sum(x$genZ[, 
+                3 * l])/(nrow(x$genZ)), digits = 3, nsmall = 3), 
+            "\n", sep = "")
     }
     cat("\n")
     coef <- cbind(x$E, x$variances, x$std.dev, x$pvalues)

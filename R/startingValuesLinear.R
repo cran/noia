@@ -1,5 +1,6 @@
 `startingValuesLinear` <-
-function (noia.linear, max.level = 2, max.dom = 2, e.unique = FALSE) 
+function (noia.linear, max.level = 2, max.dom = 2, e.unique = FALSE, 
+    e.init = TRUE) 
 {
     if (class(noia.linear) != "noia.linear") {
         stop("Object of class \"noia.linear\" expected\n")
@@ -37,22 +38,36 @@ function (noia.linear, max.level = 2, max.dom = 2, e.unique = FALSE)
                   ans[[label]] <- 0
                 }
                 if (max.dom > 1) {
-                  ans[[label]] <- ans[[label]] + e.unique.factor * 
-                    (1/4) * ((effects[effNames(c(a, a), c(l1, 
-                    l2), nloc)]/(effects[effNames(a, l1, nloc)] * 
-                    effects[effNames(a, l2, nloc)])) + (effects[effNames(c(a, 
-                    d), c(l1, l2), nloc)]/(effects[effNames(a, 
-                    l1, nloc)] * effects[effNames(d, l2, nloc)])) + 
-                    (effects[effNames(c(d, a), c(l1, l2), nloc)]/(effects[effNames(d, 
-                      l1, nloc)] * effects[effNames(a, l2, nloc)])) + 
-                    (effects[effNames(c(d, d), c(l1, l2), nloc)]/(effects[effNames(d, 
+                  if (e.init) {
+                    ans[[label]] <- ans[[label]] + e.unique.factor * 
+                      (1/4) * ((effects[effNames(c(a, a), c(l1, 
+                      l2), nloc)]/(effects[effNames(a, l1, nloc)] * 
+                      effects[effNames(a, l2, nloc)])) + (effects[effNames(c(a, 
+                      d), c(l1, l2), nloc)]/(effects[effNames(a, 
+                      l1, nloc)] * effects[effNames(d, l2, nloc)])) + 
+                      (effects[effNames(c(d, a), c(l1, l2), nloc)]/(effects[effNames(d, 
+                        l1, nloc)] * effects[effNames(a, l2, 
+                        nloc)])) + (effects[effNames(c(d, d), 
+                      c(l1, l2), nloc)]/(effects[effNames(d, 
                       l1, nloc)] * effects[effNames(d, l2, nloc)])))
+                  }
+                  else {
+                    ans[[label]] <- 0
+                  }
                 }
                 else {
-                  ans[[label]] <- ans[[label]] + e.unique.factor * 
-                    ((effects[effNames(c(a, a), c(l1, l2), nloc)]/(effects[effNames(a, 
-                      l1, nloc)] * effects[effNames(a, l2, nloc)])))
+                  if (e.init) {
+                    ans[[label]] <- ans[[label]] + e.unique.factor * 
+                      ((effects[effNames(c(a, a), c(l1, l2), 
+                        nloc)]/(effects[effNames(a, l1, nloc)] * 
+                        effects[effNames(a, l2, nloc)])))
+                  }
+                  else {
+                    ans[[label]] <- 0
+                  }
                 }
+                if (is.na(ans[[label]])) 
+                  ans[[label]] <- 0
             }
         }
     }

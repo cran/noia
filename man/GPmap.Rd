@@ -1,7 +1,7 @@
 \name{Genotype-to-Phenotype map}
 \alias{GPmap}
 
-\title{ Genotype-to-Phenotype Map }
+\title{ Genotype-to-Phenotype Mapping }
 
 \description{
   The Genotype-to-Phenotype map is a vector providing the estimate of 
@@ -25,7 +25,7 @@ GPmap(obj)
 
 \references{
 Le Rouzic A, Alvarez-Castro JM. (2008). Estimation of genetic effects and
-	genotype-phenotype maps. Evolutionary Bioinformatics, in press. 
+	genotype-phenotype maps. Evolutionary Bioinformatics, 4. 
 }
 
 \author{ Arnaud Le Rouzic <a.p.s.lerouzic@bio.uio.no> }

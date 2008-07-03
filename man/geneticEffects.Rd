@@ -5,7 +5,7 @@
 
 \title{ Genetic Effects }
 \description{
-  \code{geneticEffects} displays the geneticEffects (and their standard 
+  \code{geneticEffects} displays the genetic effects (and their standard 
   errors) from the result of \code{\link{linearRegression}}. If a new
   reference point is provided, a "change of reference" operation is performed
   (Alvarez-Castro and Carlborg 2007). 
@@ -15,23 +15,25 @@
   genetic variance due to this effect.  
 }
 \usage{
-geneticEffects(obj, ref.genotype = "P1")
+geneticEffects(obj, reference="P1", ref.genotype = NULL)
 effectsVariances(obj)
 effectsPvalues(reg)
 }
 \arguments{
   \item{obj}{ An object of class \code{"noia.linear"} provided by 
   \code{\link{linearRegression}}. }
-  \item{ref.genotype}{ The new reference point. Can
+  \item{reference}{ The new reference point. Can
   be \code{"F2"}, \code{"F1"}, \code{"Finf"}, \code{"P1"}, \code{"P2"} (see
   \code{\link{linearRegression}} for details. }
+  \item{ref.genotype}{ The same as \code{reference}, provided for compatibility
+  with older versions.}
   \item{reg}{ Output of a regression (object of class "\code{\link{lm}}" or 
   "\code{\link{nls}}"). }
 }
 \details{
-  The P-values can be extracted from both linear and multilinearRegressions, 
-  while the variances and the change of reference are restricted to the linear
-  regression.
+  The P-values can be extracted from both linear and multilinear regressions. 
+  However, variance decomposition and change of reference operation are not possible
+  from the result of a multilinear regression.
 }
 
 \references{ 
@@ -40,7 +42,7 @@ Alvarez-Castro JM, Carlborg O. (2007). A unified model for functional
 	loci analysis. Genetics 176(2):1151-1167.
 
 Le Rouzic A, Alvarez-Castro JM. (2008). Estimation of genetic effects and
-	genotype-phenotype maps. Evolutionary Bioinformatics, in press. 
+	genotype-phenotype maps. Evolutionary Bioinformatics, 4. 
 }
 
 \author{Arnaud Le Rouzic <a.p.s.lerouzic@bio.uio.no> }

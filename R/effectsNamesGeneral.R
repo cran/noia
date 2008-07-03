@@ -1,5 +1,5 @@
 `effectsNamesGeneral` <-
-function (nloc = 2) 
+function (nloc = 2, max.level = NULL, max.dom = NULL) 
 {
     if (!exists("effectsNames")) {
         data(effectsNames, package = "noia")
@@ -10,7 +10,11 @@ function (nloc = 2)
         for (i in 1:(nloc - 1)) {
             enames <- kronecker(ebase, enames, FUN = "paste", 
                 sep = "")
+            enames <- enames[sapply(enames, statusMaxLevel, max.level)]
+            enames <- enames[sapply(enames, statusMaxDom, max.dom)]
         }
     }
+    enames <- enames[sapply(enames, statusMaxLevel, max.level)]
+    enames <- enames[sapply(enames, statusMaxDom, max.dom)]
     return(strrev(enames))
 }

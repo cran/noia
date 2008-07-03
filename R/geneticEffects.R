@@ -1,11 +1,15 @@
 `geneticEffects` <-
-function (obj, ref.genotype = "P1") 
+function (obj, reference = "P1", ref.genotype = NULL) 
 {
+    if (!is.null(ref.genotype)) {
+        warning("The use of ref.genotype is obsolete. Use reference= instead")
+        reference = ref.genotype
+    }
     if (class(obj) == "noia.linear") {
-        new.smat <- genZ2S(obj$genZ, type = ref.genotype)
+        new.smat <- genZ2S(obj$genZ, reference = reference)
         new.smat <- solve(new.smat)
-        new.smat <- new.smat[colnames(obj$S), ]
-        T <- new.smat %*% obj$S
+        new.smat <- new.smat[colnames(obj$smat), ]
+        T <- new.smat %*% obj$smat
         effects <- T %*% obj$E
         std.err <- sqrt((T * T) %*% (obj$std.dev * obj$std.dev))
         ans <- cbind(effects, std.err)

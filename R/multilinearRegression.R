@@ -1,7 +1,8 @@
 `multilinearRegression` <-
-function (phen, gen = NULL, reference = "noia", genZ = NULL, 
-    max.level = NULL, max.dom = NULL, e.unique = FALSE, start.algo = "linear", 
-    start.values = NULL, ...) 
+function (phen, gen = NULL, genZ = NULL, reference = "noia", 
+    max.level = NULL, max.dom = NULL, fast = FALSE, e.unique = FALSE, 
+    start.algo = "linear", start.values = NULL, robust = FALSE, 
+    bilinear.steps = 1, ...) 
 {
     if (is.null(max.level) || max.level > 2) {
         max.level <- 2
@@ -9,73 +10,132 @@ function (phen, gen = NULL, reference = "noia", genZ = NULL,
     if (is.null(max.dom) || max.dom > max.level) {
         max.dom <- max.level
     }
-    linear <- linearRegression(phen = phen, gen = gen, reference = reference, 
-        genZ = genZ, max.level = max.level, max.dom = max.dom)
-    smat <- linear$S
-    zmat <- linear$Z
-    nloc <- linear$nloc
-    phen <- linear$phen
-    nn <- effectsNamesMultilinear(nloc, max.level, max.dom)
-    form <- formulaMultilinear(nloc, max.level, max.dom, e.unique)
-    X <- matrix2list(zmat %*% smat)
+    prep <- prepareRegression(phen = phen, gen = gen, genZ = genZ, 
+        reference = reference, max.level = max.level, max.dom = max.dom, 
+        fast = fast)
     if (is.null(start.values)) {
-        if (start.algo == "linear") {
-            start.values <- startingValues(linear, max.level, 
-                max.dom, e.unique)
-        }
-        else if (start.algo == "multilinear") {
-            mlin <- multilinearRegression(phen = phen, gen = gen, 
-                reference = reference, genZ = genZ, max.level = 2, 
-                max.dom = 0, e.unique = e.unique, start.algo = "linear", 
-                start.values = NULL, ...)
-            start.values <- startingValues(mlin, max.level, max.dom, 
-                e.unique)
-        }
-        else if (start.algo == "subset") {
-            subset.size <- 1000
-            subsample <- sample(1:length(phen), subset.size)
-            mlin <- multilinearRegression(phen = phen[subsample], 
-                gen = gen[subsample, ], reference = reference, 
-                genZ = genZ[subsample, ], max.level = max.level, 
-                max.dom = max.dom, e.unique = e.unique, start.algo = "linear", 
-                start.values = NULL, ...)
-            start.values <- startingValues(mlin, max.level, max.dom, 
-                e.unique)
-        }
+        start.values <- startingValues(prep$phen, prep$genZ, 
+            reference = reference, max.level = max.level, max.dom = max.dom, 
+            fast = fast, e.unique = e.unique, start.algo = start.algo, 
+            bilinear.steps, ...)
     }
-    regression <- nls(formula = as.formula(form), start = start.values, 
-        ...)
-    ans <- list()
-    ans$nloc <- nloc
-    ans$phen <- phen
-    ans$gen <- gen
-    ans$S <- smat
-    ans$Z <- zmat
-    ans$E <- coef(regression)
-    ans$std.dev <- summary(regression)$coef[, 2]
-    ans$pvalues <- summary(regression)$coef[, 4]
-    if (e.unique) {
-        ee <- ans$E["ee"]
-        ss <- ans$std.dev["ee"]
-        pp <- ans$pvalues["ee"]
-        ans$E <- ans$E[names(ans$E) != "ee"]
-        ans$std.dev <- ans$std.dev[names(ans$std.dev) != "ee"]
-        ans$pvalues <- ans$pvalues[names(ans$pvalues) != "ee"]
-        for (i in 1:(nloc - 1)) {
-            for (j in (i + 1):nloc) {
-                ans$E[paste("e", i, j, sep = "")] <- ee
-                ans$std.dev[paste("e", i, j, sep = "")] <- ss
-                ans$pvalues[paste("e", i, j, sep = "")] <- pp
+    ans <- NULL
+    if (robust) {
+        cat("Starting robust fitting procedure\n")
+        cat("\tTrying starting algorithm: linear...")
+        try(ans <- multilinearRegression(phen = phen, gen = gen, 
+            reference = reference, genZ = genZ, max.level = max.level, 
+            max.dom = max.dom, fast = fast, e.unique = e.unique, 
+            start.algo = "linear", control = nls.control(maxiter = 500), 
+            ...), silent = TRUE)
+        if (is.null(ans)) {
+            cat("FAILED\n")
+            cat("\tTrying starting algorithm: multilinear...")
+            try(ans <- multilinearRegression(phen = phen, gen = gen, 
+                reference = reference, genZ = genZ, max.level = max.level, 
+                max.dom = max.dom, fast = fast, e.unique = e.unique, 
+                start.algo = "multilinear", control = nls.control(maxiter = 500), 
+                ...), silent = TRUE)
+            if (is.null(ans)) {
+                cat("FAILED\n")
+                cat("\tTrying starting algorithm: subset...")
+                try(ans <- multilinearRegression(phen = phen, 
+                  gen = gen, reference = reference, genZ = genZ, 
+                  max.level = max.level, max.dom = max.dom, fast = fast, 
+                  e.unique = e.unique, start.algo = "subset", 
+                  control = nls.control(maxiter = 500), ...), 
+                  silent = TRUE)
+                if (is.null(ans)) {
+                  cat("FAILED\n")
+                  cat("\tTrying starting algorithm: bilinear...")
+                  try(ans <- multilinearRegression(phen = phen, 
+                    gen = gen, reference = reference, genZ = genZ, 
+                    max.level = max.level, max.dom = max.dom, 
+                    fast = fast, e.unique = e.unique, start.algo = "bilinear", 
+                    bilinear.steps = 1, control = nls.control(maxiter = 500), 
+                    ...), silent = TRUE)
+                  if (is.null(ans)) {
+                    cat("FAILED\n")
+                    cat("\tTrying starting algorithm: bilinear2...")
+                    try(ans <- multilinearRegression(phen = phen, 
+                      gen = gen, reference = reference, genZ = genZ, 
+                      max.level = max.level, max.dom = max.dom, 
+                      fast = fast, e.unique = e.unique, start.algo = "bilinear", 
+                      bilinear.steps = 2, control = nls.control(maxiter = 500), 
+                      ...), silent = TRUE)
+                    if (is.null(ans)) {
+                      cat("FAILED\n")
+                      cat("\tTrying starting algorithm: bilinear3...")
+                      try(ans <- multilinearRegression(phen = phen, 
+                        gen = gen, reference = reference, genZ = genZ, 
+                        max.level = max.level, max.dom = max.dom, 
+                        fast = fast, e.unique = e.unique, start.algo = "bilinear", 
+                        bilinear.steps = 3, control = nls.control(maxiter = 500), 
+                        ...), silent = TRUE)
+                      if (is.null(ans)) {
+                        cat("FAILED\n")
+                      }
+                      else {
+                        cat("OK\n")
+                      }
+                    }
+                    else {
+                      cat("OK\n")
+                    }
+                  }
+                  else {
+                    cat("OK\n")
+                  }
+                }
+                else {
+                  cat("OK\n")
+                }
+            }
+            else {
+                cat("OK\n")
             }
         }
+        else {
+            cat("OK\n")
+        }
     }
-    names(ans$E) <- nn
-    names(ans$std.dev) <- nn
-    ans$resvar <- var(residuals(regression))
-    names(ans$pvalues) <- nn
-    ans$variances <- rep(NA, length(nn))
-    names(ans$variances) <- nn
-    ans$regression <- regression
-    class(ans) <- "noia.multilinear"
+    else {
+        nn <- effectsNamesMultilinear(prep$nloc, max.level, max.dom)
+        form <- formulaMultilinear(prep$nloc, max.level, max.dom, 
+            e.unique)
+        X <- matrix2list(prep$x)
+        phen <- prep$phen
+        regression <- nls(formula = as.formula(form), start = start.values, 
+            ...)
+        ans <- prep
+        ans$E <- coef(regression)
+        ans$std.dev <- summary(regression)$coef[, 2]
+        ans$pvalues <- summary(regression)$coef[, 4]
+        if (e.unique) {
+            ee <- ans$E["ee"]
+            ss <- ans$std.dev["ee"]
+            pp <- ans$pvalues["ee"]
+            ans$E <- ans$E[names(ans$E) != "ee"]
+            ans$std.dev <- ans$std.dev[names(ans$std.dev) != 
+                "ee"]
+            ans$pvalues <- ans$pvalues[names(ans$pvalues) != 
+                "ee"]
+            for (i in 1:(prep$nloc - 1)) {
+                for (j in (i + 1):prep$nloc) {
+                  ans$E[paste("e", i, j, sep = "")] <- ee
+                  ans$std.dev[paste("e", i, j, sep = "")] <- ss
+                  ans$pvalues[paste("e", i, j, sep = "")] <- pp
+                }
+            }
+        }
+        names(ans$E) <- nn
+        names(ans$std.dev) <- nn
+        ans$resvar <- var(residuals(regression))
+        names(ans$pvalues) <- nn
+        ans$variances <- rep(NA, length(nn))
+        names(ans$variances) <- nn
+        ans$regression <- regression
+        class(ans) <- "noia.multilinear"
+    }
     return(ans)
 }

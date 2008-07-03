@@ -31,5 +31,5 @@ matrix2list(mat)
 }
 
 \keyword{ list }
-\keyword{ manip }
+\keyword{ internal }
 
