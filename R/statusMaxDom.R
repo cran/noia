@@ -2,7 +2,9 @@
 function (effect, max.dom = NULL) 
 {
     if (!exists("effectsNames")) {
-        effectsNames <- NULL; rm(effectsNames); data(effectsNames, package = "noia")
+        effectsNames <- NULL
+        rm(effectsNames)
+        data(effectsNames, package = "noia")
     }
     if (!is.null(max.dom) && nchar(effect) > max.dom) {
         if (sum(strsplit(effect, "")[[1]] == effectsNames[3]) > 

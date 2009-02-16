@@ -3,10 +3,14 @@ function (genZ, reference = "F2", max.level = NULL, max.dom = NULL,
     threshold = 0) 
 {
     if (!exists("genotypesNames")) {
-        genotypesNames <- NULL; rm(genotypesNames); data(genotypesNames, package = "noia")
+        genotypesNames <- NULL
+        rm(genotypesNames)
+        data(genotypesNames, package = "noia")
     }
     if (!exists("effectsNames")) {
-        effectsNames <- NULL; rm(effectsNames); data(effectsNames, package = "noia")
+        effectsNames <- NULL
+        rm(effectsNames)
+        data(effectsNames, package = "noia")
     }
     ans <- list()
     N <- nrow(genZ)

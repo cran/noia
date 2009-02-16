@@ -2,6 +2,8 @@
 function (effects = NULL, loci = NULL, nloc = 1) 
 {
     if (!exists("effectsNames")) {
+        effectsNames <- NULL
+        rm(effectsNames)
         data(effectsNames, package = "noia")
     }
     n <- paste(rep(effectsNames[1], nloc), collapse = "")

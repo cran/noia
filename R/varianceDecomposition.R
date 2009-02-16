@@ -2,8 +2,11 @@
 function (obj) 
 {
     if (!exists("effectsNames")) {
-        effectsNames <- NULL; rm(effectsNames); data(effectsNames, package = "noia")
+        effectsNames <- NULL
+        rm(effectsNames)
+        data(effectsNames, package = "noia")
     }
+    ans <- list()
     if (class(obj) == "noia.linear" || class(obj) == "noia.multilinear") {
         n <- names(obj$variances)
         if (obj$nloc == 1) {
@@ -19,10 +22,8 @@ function (obj)
             n.e <- apply(sapply(strsplit(n, ""), "c") == effectsNames[4], 
                 2, "sum")
         }
-        sum.total <- 0
         cat("\n")
         for (lev in 1:(obj$nloc)) {
-            sum.level <- 0
             if (class(obj) == "noia.linear" || lev < 2) {
                 for (nr.d in 0:lev) {
                   nr.a <- lev - nr.d
@@ -31,11 +32,13 @@ function (obj)
                   if (is.na(v)) {
                     v <- 0
                   }
-                  sum.level <- sum.level + v
                   if (v > 0) {
-                    cat("\tVar(", paste(rep("A", nr.a), rep("D", 
-                      nr.d), sep = "", coll = ""), "):\t", format(v, 
-                      digits = 5), "\n", sep = "")
+                    order.label <- as.character(lev)
+                    component.label <- paste(rep("A", nr.a), 
+                      rep("D", nr.d), sep = "", collapse = "")
+                    names(v) <- component.label
+                    ans[[order.label]] <- c(ans[[order.label]], 
+                      v)
                   }
                 }
             }
@@ -44,22 +47,20 @@ function (obj)
                 if (is.na(v)) {
                   v <- 0
                 }
-                sum.level <- sum.level + v
                 if (v > 0) {
-                  cat("\tVar(", paste(rep("E", lev), sep = "", 
-                    coll = ""), "):\t", format(v, digits = 5), 
-                    "\n")
+                  order.label <- as.character(lev)
+                  component.label <- paste(rep("E", lev), sep = "", 
+                    collapse = "")
+                  names(v) <- component.label
+                  ans[[order.label]] <- c(ans[[order.label]], 
+                    v)
                 }
             }
-            sum.total <- sum.total + sum.level
-            if (sum.level > 0) {
-                cat("\tTotal level ", lev, ":\t", format(sum.level, 
-                  digits = 5), "\n\n")
-            }
         }
-        cat("\tTotal:\t", format(sum.total, digits = 5), "\n\n")
     }
     else {
         stop("Class", class(obj), "unknown.\n")
     }
+    class(ans) <- c("noia.vardec", class(ans))
+    return(ans)
 }

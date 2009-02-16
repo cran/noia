@@ -2,7 +2,9 @@
 function (nloc = 2, max.level = NULL, max.dom = NULL) 
 {
     if (!exists("effectsNames")) {
-        effectsNames <- NULL; rm(effectsNames); data(effectsNames, package = "noia")
+        effectsNames <- NULL
+        rm(effectsNames)
+        data(effectsNames, package = "noia")
     }
     ebase <- effectsNames[1:3]
     enames <- ebase

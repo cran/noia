@@ -6,7 +6,9 @@ function (noia.linear, max.level = 2, max.dom = 2, e.unique = FALSE,
         stop("Object of class \"noia.linear\" expected\n")
     }
     if (!exists("effectsNames")) {
-        effectsNames <- NULL; rm(effectsNames); data(effectsNames, package = "noia")
+        effectsNames <- NULL
+        rm(effectsNames)
+        data(effectsNames, package = "noia")
     }
     a <- effectsNames[2]
     d <- effectsNames[3]

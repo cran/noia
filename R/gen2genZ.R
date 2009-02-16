@@ -2,7 +2,9 @@
 function (gen) 
 {
     if (!exists("genotypesNames")) {
-        genotypesNames <- NULL; rm(genotypesNames); data(genotypesNames, package = "noia")
+        genotypesNames <- NULL
+        rm(genotypesNames)
+        data(genotypesNames, package = "noia")
     }
     ans <- NULL
     n.gen <- apply(!is.na(gen), 2, "sum")

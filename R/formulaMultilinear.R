@@ -2,6 +2,8 @@
 function (nloc = 2, max.level = 2, max.dom = 2, e.unique = FALSE) 
 {
     if (!exists("effectsNames")) {
+        effectsNames <- NULL
+        rm(effectsNames)
         data(effectsNames, package = "noia")
     }
     a <- effectsNames[2]

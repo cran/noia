@@ -1,5 +1,6 @@
 \name{Variance decomposition}
 \alias{varianceDecomposition}
+\alias{print.noia.vardec}
 
 \title{ Decomposition of Genetic Variance }
 \description{
@@ -12,11 +13,15 @@
 }
 \usage{
 varianceDecomposition(obj)
+\method{print}{noia.vardec}(x, ...)
 }
 
 \arguments{
   \item{obj}{ An object of class \code{"noia.linear"}, the output of 
   \code{\link{linearRegression}}. }
+  \item{x}{ An object of class \code{"noia.vardec"}, the output of 
+  \code{\link{varianceDecomposition}}. }
+  \item{\dots}{ No effect for the moment. }
 }
 \details{
   The details of the variance decomposition are provided for all levels of
@@ -24,8 +29,11 @@ varianceDecomposition(obj)
   for 2nd order interactions, etc.
 }
 \value{
-	The function only displays the variances in a nice way and does not return
-	any object.
+	\code{varianceDecomposition} returns a list of vectors. Each element of the list corresponds
+	to an order of interactions, and the vectors detail the variance 
+	decomposition within each level. 
+	\code{print.noia.vardec} prints the previous list in a nice way, and computed the percentage of
+	genetic variance explained by each variance component. 
 }
 \references{ 
 Alvarez-Castro JM, Carlborg O. (2007). A unified model for functional 
