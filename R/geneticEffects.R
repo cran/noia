@@ -1,4 +1,4 @@
-`geneticEffects` <-
+geneticEffects <-
 function (obj, reference = "P1", ref.genotype = NULL) 
 {
     if (!is.null(ref.genotype)) {

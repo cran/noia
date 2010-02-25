@@ -1,7 +1,11 @@
-`genZ2ZS` <-
+genZ2ZS <-
 function (genZ, reference = "F2", max.level = NULL, max.dom = NULL, 
     threshold = 0) 
 {
+    "strrev" <- function(ss) {
+        sapply(lapply(strsplit(ss, character(0)), rev), paste, 
+            collapse = "")
+    }
     if (!exists("genotypesNames")) {
         genotypesNames <- NULL
         rm(genotypesNames)

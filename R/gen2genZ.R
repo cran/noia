@@ -1,4 +1,4 @@
-`gen2genZ` <-
+gen2genZ <-
 function (gen) 
 {
     if (!exists("genotypesNames")) {

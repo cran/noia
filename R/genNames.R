@@ -1,4 +1,4 @@
-`genNames` <-
+genNames <-
 function (nloc = 2) 
 {
     if (!exists("genotypesNames")) {

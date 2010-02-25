@@ -1,4 +1,4 @@
-`Sloc` <-
+Sloc <-
 function (reference = "F2", i = NULL, genZ = NULL) 
 {
     ans <- NULL

@@ -1,4 +1,4 @@
-`startingValuesLinear` <-
+startingValuesLinear <-
 function (noia.linear, max.level = 2, max.dom = 2, e.unique = FALSE, 
     e.init = TRUE) 
 {

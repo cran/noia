@@ -1,4 +1,4 @@
-`GPmap` <-
+GPmap <-
 function (obj) 
 {
     if (class(obj) == "noia.linear") {

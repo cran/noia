@@ -1,4 +1,4 @@
-`formulaMultilinear` <-
+formulaMultilinear <-
 function (nloc = 2, max.level = 2, max.dom = 2, e.unique = FALSE) 
 {
     if (!exists("effectsNames")) {

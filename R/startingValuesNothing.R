@@ -1,4 +1,4 @@
-`startingValuesNothing` <-
+startingValuesNothing <-
 function (nloc, max.level = 2, max.dom = 2, e.unique = FALSE) 
 {
     ans <- list()

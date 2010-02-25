@@ -1,4 +1,4 @@
-`effectsSelect` <-
+effectsSelect <-
 function (nloc, max.level = NULL, max.dom = NULL, effects = NULL) 
 {
     if (is.null(effects)) 

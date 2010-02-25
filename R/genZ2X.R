@@ -1,4 +1,4 @@
-`genZ2X` <-
+genZ2X <-
 function (genZ, reference = "F2", max.level = NULL, max.dom = NULL) 
 {
     if (!exists("genotypesNames")) {

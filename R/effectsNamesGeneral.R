@@ -1,6 +1,10 @@
-`effectsNamesGeneral` <-
+effectsNamesGeneral <-
 function (nloc = 2, max.level = NULL, max.dom = NULL) 
 {
+    "strrev" <- function(ss) {
+        sapply(lapply(strsplit(ss, character(0)), rev), paste, 
+            collapse = "")
+    }
     if (!exists("effectsNames")) {
         effectsNames <- NULL
         rm(effectsNames)

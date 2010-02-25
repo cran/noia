@@ -1,4 +1,4 @@
-`partialX` <-
+partialX <-
 function (genZ, reference = "F2", effect) 
 {
     if (!exists("effectsNames")) {

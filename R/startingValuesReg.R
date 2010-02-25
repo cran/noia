@@ -1,4 +1,4 @@
-`startingValuesReg` <-
+startingValuesReg <-
 function (reg, max.level = 2, max.dom = 2, e.unique = FALSE, 
     nloc = NULL) 
 {

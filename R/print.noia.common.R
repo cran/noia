@@ -1,4 +1,4 @@
-`print.noia.common` <-
+print.noia.common <-
 function (x, ...) 
 {
     cat("\nPhenotype:\n")
@@ -20,10 +20,12 @@ function (x, ...)
     colnames(coef) <- c("Effects", "Variances", "Std.dev", "Pr(>|t|)")
     printCoefmat(coef, P.values = TRUE, signif.stars = TRUE, 
         has.Pvalue = TRUE)
-    variance <- var(x$phen, na.rm = TRUE)
+    variance <- var(x$phen, na.rm = TRUE) * (length(x$phen[!is.na(x$phen)]) - 
+        1)/length(x$phen[!is.na(x$phen)])
     cat("\nVariances\n\tTotal (phen)\t", format(variance, digits = 5), 
         "\n\tResidual\t", format(x$resvar, digits = 5), "\n\tExplained\t", 
         format(variance - x$resvar, digits = 5), "\t(", format(100 * 
-            (variance - x$resvar)/variance, digits = 3), "%)\n", 
-        sep = "")
+            (variance - x$resvar)/variance, digits = 3), "%)", 
+        "\n\tGenetic \t", format(sum(x$variances, na.rm = TRUE), 
+            digits = 5), "\n", sep = "")
 }

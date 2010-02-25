@@ -1,4 +1,4 @@
-`statusMaxLevel` <-
+statusMaxLevel <-
 function (effect, max.level = NULL) 
 {
     if (!exists("effectsNames")) {

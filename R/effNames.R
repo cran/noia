@@ -1,4 +1,4 @@
-`effNames` <-
+effNames <-
 function (effects = NULL, loci = NULL, nloc = 1) 
 {
     if (!exists("effectsNames")) {

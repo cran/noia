@@ -1,4 +1,4 @@
-`prepareRegression` <-
+prepareRegression <-
 function (phen, gen = NULL, genZ = NULL, reference = "noia", 
     max.level = NULL, max.dom = NULL, fast = FALSE) 
 {

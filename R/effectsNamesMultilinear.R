@@ -1,4 +1,4 @@
-`effectsNamesMultilinear` <-
+effectsNamesMultilinear <-
 function (nloc = 2, max.level = 2, max.dom = 2) 
 {
     if (!exists("effectsNames")) {

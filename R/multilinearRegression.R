@@ -1,9 +1,17 @@
-`multilinearRegression` <-
+multilinearRegression <-
 function (phen, gen = NULL, genZ = NULL, reference = "noia", 
     max.level = NULL, max.dom = NULL, fast = FALSE, e.unique = FALSE, 
     start.algo = "linear", start.values = NULL, robust = FALSE, 
     bilinear.steps = 1, ...) 
 {
+    "matrix2list" <- function(mat) {
+        ans <- list()
+        for (c in 1:ncol(mat)) {
+            label <- colnames(mat)[c]
+            ans[[label]] <- c(mat[, c])
+        }
+        return(ans)
+    }
     if (is.null(max.level) || max.level > 2) {
         max.level <- 2
     }
@@ -130,7 +138,8 @@ function (phen, gen = NULL, genZ = NULL, reference = "noia",
         }
         names(ans$E) <- nn
         names(ans$std.dev) <- nn
-        ans$resvar <- var(residuals(regression))
+        ans$resvar <- var(residuals(regression)) * (length(residuals(regression)) - 
+            1)/length(residuals(regression))
         names(ans$pvalues) <- nn
         ans$variances <- rep(NA, length(nn))
         names(ans$variances) <- nn

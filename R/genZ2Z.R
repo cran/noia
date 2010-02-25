@@ -1,4 +1,4 @@
-`genZ2Z` <-
+genZ2Z <-
 function (genZ) 
 {
     ans <- NULL

@@ -1,4 +1,4 @@
-\name{NOIA package}
+\name{ NOIA package}
 \alias{noia-package}
 \alias{noia}
 \docType{package}
@@ -10,7 +10,7 @@ The NOIA model, as described extensively in Alvarez-Castro &
 	Carlborg (2007), is a framework facilitating the 
 	estimation of geneticEffects and genotype-to-phenotype maps. This package
 	provides the basic tools to perform linear and multilinear regressions from
-	real populations, estimating the genetic effects from different reference
+	real populations, analyse pure genotype-to-phenotype (GP) maps in ideal populations, estimating the genetic effects from different reference
 	points, the genotypic values, and the decomposition of genetic variances in
 	a multi-locus, 2 alleles system. This package is extensively described in 
 	Le Rouzic & Alvarez-Castro (2008).
@@ -19,19 +19,25 @@ The NOIA model, as described extensively in Alvarez-Castro &
 \tabular{ll}{
 Package: \tab noia\cr
 Type: \tab Package\cr
-Version: \tab 0.92\cr
-Date: \tab 2008-07-03\cr
+Version: \tab 0.94\cr
+Date: \tab 2010-02-25\cr
 License: \tab GPL-2\cr
 }
 
-\strong{Data set}: The user must provide (i) The vector of phenotypes 
+\strong{Regression data set}: The user must provide (i) The vector of phenotypes 
 	of all individuals measured in 
 	the population, and (ii) The matrix of the genotypes. There are two input 
 	formats for the genotype, see \code{\link{linearRegression}}.
 	
 \strong{Regression functions}: \code{\link{linearRegression}} and 
 	\code{\link{multilinearRegression}}.
-	
+
+\strong{GP map data set}: The user must provide (i) The \eqn{3^L} (where \eqn{L} is the number of loci) vector of genotypic values 
+    (\strong{G} in Alvarez-Castro & Carlborg (2007))
+    (ii) Allele or genotype frequencies in the reference population.
+    
+\strong{GP map analysis function}: \code{\link{linearGPmapanalysis}}.
+
 \strong{Change of reference}: \code{\link{geneticEffects}}.
 
 \strong{Genotype-to-phenotype map}: \code{\link{GPmap}}.
@@ -40,9 +46,9 @@ License: \tab GPL-2\cr
 }
 
 \author{
-Arnaud Le Rouzic
+Arnaud Le Rouzic, Arne B. Gjuvsland
 
-Maintainer: Arnaud Le Rouzic <a.p.s.lerouzic@bio.uio.no>
+Maintainer: Arnaud Le Rouzic <a.p.s.lerouzic@bio.uio.no>, , Arne B. Gjuvsland <arne.gjuvsland@umb.no>
 }
 \references{
 Alvarez-Castro JM, Carlborg O. (2007). A unified model for functional 
@@ -76,11 +82,18 @@ linear
 # Multilinear effects
 multilinear
 
+# Genotype-to-phenotype map analysis
+linearGP <- linearGPmapanalysis(map, reference="F2")
+
+# Linear effects in ideal F2 population
+linearGP
+
 # Change of reference: geneticEffects in the "11" genotype (parental 1)
 geneticEffects(linear, ref.genotype="P1")
 
 # Variance decomposition
 varianceDecomposition(linear)
+varianceDecomposition(linearGP)
 
 # GP maps
 maps <- cbind(map, GPmap(linear)[,1], GPmap(multilinear)[,1])

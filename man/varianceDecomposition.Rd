@@ -18,7 +18,8 @@ varianceDecomposition(obj)
 
 \arguments{
   \item{obj}{ An object of class \code{"noia.linear"}, the output of 
-  \code{\link{linearRegression}}. }
+  \code{\link{linearRegression}} or of class \code{"noia.linear.gpmap"}, the output of 
+  \code{\link{linearGPmapanalysis}}. }
   \item{x}{ An object of class \code{"noia.vardec"}, the output of 
   \code{\link{varianceDecomposition}}. }
   \item{\dots}{ No effect for the moment. }

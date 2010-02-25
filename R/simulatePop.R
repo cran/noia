@@ -1,5 +1,5 @@
-`simulatePop` <-
-function (gmap, N = 100, sigmaE = 1, type = "F2") 
+simulatePop <-
+function (gmap, N = 100, sigmaE = 1, type = "F2", freqmat = NULL) 
 {
     nloc <- log(length(gmap))/log(3)
     ans <- NULL
@@ -12,7 +12,7 @@ function (gmap, N = 100, sigmaE = 1, type = "F2")
         names(gmap) <- n
     }
     for (i in 1:N) {
-        g <- drawGenotype(nloc, type)
+        g <- drawGenotype(nloc, type, freqmat)
         indiv <- c(sigmaE * rnorm(1) + gmap[g], unlist(strsplit(g, 
             character(0))))
         ans <- rbind(ans, as.numeric(indiv))

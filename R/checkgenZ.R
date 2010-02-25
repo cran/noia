@@ -1,4 +1,4 @@
-`checkgenZ` <-
+checkgenZ <-
 function (genZ, tol = 1e-04) 
 {
     if (ncol(genZ)%%3 != 0) {

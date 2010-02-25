@@ -1,11 +1,17 @@
-`print.noia.vardec` <-
+print.noia.vardec <-
 function (x, ...) 
 {
     cat("\nVariance decomposition:\n")
-    totvar <- sum(unlist(x))
+    if (!is.null(x$V_G)) {
+        totvar <- x$V_G
+    }
+    else {
+        totvar <- sum(unlist(x))
+    }
     cat(paste("\tTotal genetic variance:", format(totvar, digits = 5), 
         "\n"))
-    for (level in names(x)) {
+    print(names(x))
+    for (level in setdiff(names(x), "V_G")) {
         cat(paste("\tOrder", level, "\tTotal:\t", format(sum(x[[level]]), 
             digits = 5, nsmall = 5), "\t(", format(100 * sum(x[[level]])/totvar, 
             digits = 3, nsmall = 1), "%)", "\n"))

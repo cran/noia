@@ -1,4 +1,4 @@
-`reconstructLinearEffects` <-
+reconstructLinearEffects <-
 function (noia.multilinear) 
 {
     if (class(noia.multilinear) != "noia.multilinear") {

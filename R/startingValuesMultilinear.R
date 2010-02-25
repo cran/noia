@@ -1,4 +1,4 @@
-`startingValuesMultilinear` <-
+startingValuesMultilinear <-
 function (noia.multilinear, max.level = 2, max.dom = 2, e.unique = FALSE) 
 {
     if (class(noia.multilinear) != "noia.multilinear") {

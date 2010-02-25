@@ -1,4 +1,4 @@
-`Z2freq` <-
+Z2freq <-
 function (Z) 
 {
     s <- apply(Z, 2, sum)

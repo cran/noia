@@ -1,4 +1,4 @@
-`effectsPvalues` <-
+effectsPvalues <-
 function (reg) 
 {
     if ((class(reg) != "lm") && (class(reg) != "nls")) {

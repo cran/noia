@@ -1,7 +1,11 @@
-`genZ2S` <-
+genZ2S <-
 function (genZ = NULL, reference = "F2", nloc = NULL, max.level = NULL, 
     max.dom = NULL) 
 {
+    "strrev" <- function(ss) {
+        sapply(lapply(strsplit(ss, character(0)), rev), paste, 
+            collapse = "")
+    }
     if (is.null(nloc)) {
         if (is.null(genZ)) {
             stop("Function Z2S: number of loci unknown; either zmat or nloc must be provided")

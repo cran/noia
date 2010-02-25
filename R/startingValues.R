@@ -1,4 +1,4 @@
-`startingValues` <-
+startingValues <-
 function (phen, genZ, reference = "noia", max.level = 2, max.dom = 2, 
     fast = FALSE, e.unique = FALSE, start.algo = "linear", bilinear.steps = NULL, 
     ...) 

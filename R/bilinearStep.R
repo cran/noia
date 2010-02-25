@@ -1,4 +1,4 @@
-`bilinearStep` <-
+bilinearStep <-
 function (form, X, phen, marginal, interactions, ...) 
 {
     n.marginal <- names(marginal)

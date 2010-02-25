@@ -1,4 +1,4 @@
-`genNamesAppend` <-
+genNamesAppend <-
 function (name) 
 {
     if (!exists("genotypesNames")) {

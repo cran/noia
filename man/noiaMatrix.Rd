@@ -1,4 +1,4 @@
-\name{NOIA matrix manipulation}
+ \name{NOIA matrix manipulation}
 
 \alias{gen2Z}
 \alias{gen2genZ}
@@ -11,6 +11,9 @@
 \alias{Z2freq}
 \alias{partialX}
 \alias{Sloc}
+\alias{freqmat2Sgenofreqloc}
+\alias{freqmat2Sgenofreq}
+
 
 \title{ Matrix algebra in the NOIA framework. }
 \description{
@@ -31,6 +34,8 @@ checkgenZ(genZ, tol=0.0001)
 Z2freq(Z)
 partialX(genZ, reference="F2", effect)
 Sloc(reference="F2", i=NULL, genZ=NULL)
+freqmat2Sgenofreqloc(reference="F2", i=NULL, freqmat=NULL, sinv=TRUE)
+freqmat2Sgenofreq(nloc, reference="F2", freqmat=NULL, sinv=TRUE)
 }
 
 \arguments{
@@ -52,6 +57,13 @@ Sloc(reference="F2", i=NULL, genZ=NULL)
   frequencies can be different from 1.}
   \item{effect}{ The name of a genetic effect (such as \code{".ad"}). }
   \item{i}{ Index of the locus. }
+  \item{freqmat}{ For \code{reference="G2A"}: A vector of length \code{nloc} containing allele frequencies such that 
+                  \code{freqmat[i]=frequency(allele 1)} for locus \code{i}.
+                  
+                  For \code{reference="noia"}: A \code{(nloc x 3)} matrix of genotype frequencies such that 
+                  \code{freqmat[i,]=[frequency(1) frequency(2) frequency(3)]} for locus \code{i}. }
+  \item{sinv}{ Boolean flag indicating whether inv(S) should be returned in addition to S }
+
 }
 
 \details{
@@ -76,6 +88,10 @@ Sloc(reference="F2", i=NULL, genZ=NULL)
 \code{partialX}: Computes the product of \code{Z} and \code{S} matrices, keeping \code{Z} and \code{S} as small as possible considering a given effect \code{effect}.
 
 \code{Sloc}: Provides a 3x3 \code{S} matrix, corresponding to one locus. Frequency-dependent reference points will require the \code{genZ} matrix and the index of the locus.
+
+\code{freqmat2Sgenofreqloc}:  Returns the 3x3 \code{S} matrix (and \code{inv(S)} if \code{sinv=TRUE}) for given \code{i}, \code{freqmat} and \code{reference}.
+
+\code{freqmat2Sgenofreq}:  Returns the 3^nloc x 3^nloc \code{S} matrix (and \code{inv(S)} if \code{sinv=TRUE}) for given \code{freqmat} and \code{reference}.
 }
 
 \references{ 
@@ -86,9 +102,9 @@ Alvarez-Castro JM, Carlborg O. (2007). A unified model for functional
 Le Rouzic A, Alvarez-Castro JM. (2008). Estimation of genetic effects and
 	genotype-phenotype maps. Evolutionary Bioinformatics, 4. 
 }
-\author{ Arnaud Le Rouzic <a.p.s.lerouzic@bio.uio.no> }
+\author{ Arnaud Le Rouzic <a.p.s.lerouzic@bio.uio.no>, Arne B. Gjuvsland <arne.gjuvsland@umb.no> }
 
-\seealso{ \code{\link{linearRegression}},   \code{\link{multilinearRegression}} }
+\seealso{ \code{\link{linearRegression}},   \code{\link{multilinearRegression}}, \code{\link{linearGPmapanalysis}} }
 \examples{
 set.seed(123456789)
 

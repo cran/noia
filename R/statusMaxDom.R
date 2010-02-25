@@ -1,4 +1,4 @@
-`statusMaxDom` <-
+statusMaxDom <-
 function (effect, max.dom = NULL) 
 {
     if (!exists("effectsNames")) {

@@ -1,4 +1,4 @@
-`varianceDecomposition` <-
+varianceDecomposition <-
 function (obj) 
 {
     if (!exists("effectsNames")) {
@@ -7,7 +7,8 @@ function (obj)
         data(effectsNames, package = "noia")
     }
     ans <- list()
-    if (class(obj) == "noia.linear" || class(obj) == "noia.multilinear") {
+    if (class(obj) == "noia.linear" || class(obj) == "noia.linear.gpmap" || 
+        class(obj) == "noia.multilinear") {
         n <- names(obj$variances)
         if (obj$nloc == 1) {
             n.a <- c(0, 1, 0)
@@ -22,9 +23,9 @@ function (obj)
             n.e <- apply(sapply(strsplit(n, ""), "c") == effectsNames[4], 
                 2, "sum")
         }
-        cat("\n")
         for (lev in 1:(obj$nloc)) {
-            if (class(obj) == "noia.linear" || lev < 2) {
+            if (class(obj) == "noia.linear" || class(obj) == 
+                "noia.linear.gpmap" || lev < 2) {
                 for (nr.d in 0:lev) {
                   nr.a <- lev - nr.d
                   v <- sum(obj$variances[(n.a == nr.a) & (n.d == 
@@ -60,6 +61,9 @@ function (obj)
     }
     else {
         stop("Class", class(obj), "unknown.\n")
+    }
+    if (class(obj) == "noia.linear.gpmap") {
+        ans$V_G <- obj$V_G
     }
     class(ans) <- c("noia.vardec", class(ans))
     return(ans)
