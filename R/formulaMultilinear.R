@@ -34,7 +34,7 @@ function (nloc = 2, max.level = 2, max.dom = 2, e.unique = FALSE)
                       l1, "*d", l2, "*ee", sep = "")
                     f <- paste(f, " + ", "X[[\"", dXa, "\"]]*d", 
                       l1, "*a", l2, "*ee", sep = "")
-                    f <- paste(f, " + ", "X[[\"", aXa, "\"]]*d", 
+                    f <- paste(f, " + ", "X[[\"", dXd, "\"]]*d", 
                       l1, "*d", l2, "*ee", sep = "")
                   }
                 }
@@ -46,7 +46,7 @@ function (nloc = 2, max.level = 2, max.dom = 2, e.unique = FALSE)
                       l1, "*d", l2, "*e", l1, l2, sep = "")
                     f <- paste(f, " + ", "X[[\"", dXa, "\"]]*d", 
                       l1, "*a", l2, "*e", l1, l2, sep = "")
-                    f <- paste(f, " + ", "X[[\"", aXa, "\"]]*d", 
+                    f <- paste(f, " + ", "X[[\"", dXd, "\"]]*d", 
                       l1, "*d", l2, "*e", l1, l2, sep = "")
                   }
                 }

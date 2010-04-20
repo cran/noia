@@ -22,7 +22,7 @@ function (gmap, reference = "F2", freqmat = NULL, S_full = TRUE)
         for (l in 1:ans$nloc) {
             loc <- freqmat2Sgenofreqloc(reference = reference, 
                 l, freqmat)
-            ans$smat <- c(ans$smat, list(loc$S))
+            ans$smat <- c(ans$smat, list(loc$smat))
             ans$sinv <- c(ans$sinv, list(loc$sinv))
             ans$genofreq <- kronecker(loc$genofreq, ans$genofreq)
             ans$genofreqloc <- rbind(ans$genofreqloc, loc$genofreq)

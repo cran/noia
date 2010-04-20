@@ -19,8 +19,8 @@ The NOIA model, as described extensively in Alvarez-Castro &
 \tabular{ll}{
 Package: \tab noia\cr
 Type: \tab Package\cr
-Version: \tab 0.94\cr
-Date: \tab 2010-02-25\cr
+Version: \tab 0.94.1\cr
+Date: \tab 2010-04-20\cr
 License: \tab GPL-2\cr
 }
 

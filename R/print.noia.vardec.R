@@ -10,7 +10,6 @@ function (x, ...)
     }
     cat(paste("\tTotal genetic variance:", format(totvar, digits = 5), 
         "\n"))
-    print(names(x))
     for (level in setdiff(names(x), "V_G")) {
         cat(paste("\tOrder", level, "\tTotal:\t", format(sum(x[[level]]), 
             digits = 5, nsmall = 5), "\t(", format(100 * sum(x[[level]])/totvar, 
