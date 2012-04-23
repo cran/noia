@@ -1,13 +1,11 @@
 \name{GP map analysis}
 \alias{linearGPmapanalysis}
-\alias{preparelinearGPmap}
 
 \title{ Noia analysis of genotype-to-phenotype (GP) maps in ideal populations }
 \description{ Functions for doing a NOIA analysis of a GP map for \eqn{L} loci in a population where the loci are in complete linkage equilibrium. }
 \usage{
 linearGPmapanalysis(gmap, reference="F2", freqmat=NULL, 
                     max.level=NULL , S_full=NULL)
-preparelinearGPmap(gmap, reference="F2", freqmat=NULL, S_full=TRUE)
 }
 
 \arguments{
@@ -29,7 +27,6 @@ preparelinearGPmap(gmap, reference="F2", freqmat=NULL, S_full=TRUE)
     When it comes to the \code{S_full} argument keeping the multilocus \code{S} matrix in memory is generally fastest for computing all \eqn{3^L} 
     genetic effects. However it does not allow for computing only a subset of the effects and also runs out of memory for \eqn{L>8} on a typical desktop machine.
     For S_full=NULL in \code{linearGPmapanalysis} a full \code{S} matrix is used if \eqn{L<=8} and max.level=NULL, while \eqn{L} single locus \code{S} matrices are used otherwise.  
-    \code{prepareGPmapanalysis} performs all preliminary calculation on the dataset, but does not solve the linear system. 
 }
 
 \value{
@@ -38,18 +35,18 @@ preparelinearGPmap(gmap, reference="F2", freqmat=NULL, S_full=TRUE)
 
 \references{ 
 Alvarez-Castro JM, Carlborg O. (2007). A unified model for functional 
-	and statistical epistasis and its application in quantitative trait 
-	loci analysis. Genetics 176(2):1151-1167.
-	
+    and statistical epistasis and its application in quantitative trait 
+    loci analysis. Genetics 176(2):1151-1167.
+    
 Cheverud JM, Routman, EJ. (1995). Epistasis and its contribution to 
-	genetic variance components. Genetics 139:1455-1461.
-	
-	
+    genetic variance components. Genetics 139:1455-1461.
+    
+    
 Le Rouzic A, Alvarez-Castro JM. (2008). Estimation of genetic effects and
-	genotype-phenotype maps. Evolutionary Bioinformatics 4. 
-	
+    genotype-phenotype maps. Evolutionary Bioinformatics 4. 
+    
 Zeng ZB, Wang T, Zou W. (2005). Modelling quantitative trait loci and 
-	interpretation of models. Genetics 169: 1711-1725. 
+    interpretation of models. Genetics 169: 1711-1725. 
  }
  
 \author{ Arne B. Gjuvsland <arne.gjuvsland@umb.no> }

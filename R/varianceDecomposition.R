@@ -30,13 +30,10 @@ function (obj)
                   nr.a <- lev - nr.d
                   v <- sum(obj$variances[(n.a == nr.a) & (n.d == 
                     nr.d)])
-                  if (is.na(v)) {
-                    v <- 0
-                  }
-                  if (v > 0) {
+                  {
                     order.label <- as.character(lev)
-                    component.label <- paste(rep("A", nr.a), 
-                      rep("D", nr.d), sep = "", collapse = "")
+                    component.label <- paste(c(rep("A", nr.a), 
+                      rep("D", nr.d)), collapse = "")
                     names(v) <- component.label
                     ans[[order.label]] <- c(ans[[order.label]], 
                       v)
@@ -45,13 +42,9 @@ function (obj)
             }
             else {
                 v <- sum(obj$variances[n.e == lev])
-                if (is.na(v)) {
-                  v <- 0
-                }
-                if (v > 0) {
+                if (is.finite(v)) {
                   order.label <- as.character(lev)
-                  component.label <- paste(rep("E", lev), sep = "", 
-                    collapse = "")
+                  component.label <- paste(rep("E", lev), collapse = "")
                   names(v) <- component.label
                   ans[[order.label]] <- c(ans[[order.label]], 
                     v)

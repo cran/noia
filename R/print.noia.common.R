@@ -16,12 +16,11 @@ function (x, ...)
             "\n", sep = "")
     }
     cat("\n")
-    coef <- cbind(x$E, x$variances, x$std.dev, x$pvalues)
-    colnames(coef) <- c("Effects", "Variances", "Std.dev", "Pr(>|t|)")
+    coef <- cbind(x$E, x$variances, x$std.err, x$pvalues)
+    colnames(coef) <- c("Effects", "Variances", "Std.err", "Pr(>|t|)")
     printCoefmat(coef, P.values = TRUE, signif.stars = TRUE, 
         has.Pvalue = TRUE)
-    variance <- var(x$phen, na.rm = TRUE) * (length(x$phen[!is.na(x$phen)]) - 
-        1)/length(x$phen[!is.na(x$phen)])
+    variance <- var(x$phen, na.rm = TRUE)
     cat("\nVariances\n\tTotal (phen)\t", format(variance, digits = 5), 
         "\n\tResidual\t", format(x$resvar, digits = 5), "\n\tExplained\t", 
         format(variance - x$resvar, digits = 5), "\t(", format(100 * 

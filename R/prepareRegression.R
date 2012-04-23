@@ -31,6 +31,7 @@ function (phen, gen = NULL, genZ = NULL, reference = "noia",
     }
     ans$phen <- ans$phen[!is.na(ans$phen)]
     ans$nloc <- ncol(ans$genZ)/3
+    ans$reference <- reference
     SandZ <- list()
     ans$x <- NULL
     if (fast) {

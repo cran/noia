@@ -25,10 +25,9 @@ function (phen, gen = NULL, genZ = NULL, reference = "noia",
     ans$E <- coef(regression)
     names(ans$E) <- nn
     ans$variances <- effectsVariances(ans)
-    ans$std.dev <- summary(regression)$coef[, 2]
+    ans$std.err <- effectsStdErr(regression)
     ans$pvalues <- effectsPvalues(regression)
-    ans$resvar <- var(residuals(regression)) * (length(residuals(regression)) - 
-        1)/length(residuals(regression))
+    ans$resvar <- var(residuals(regression))
     ans$regression <- regression
     return(ans)
 }

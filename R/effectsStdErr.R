@@ -1,4 +1,4 @@
-effectsPvalues <-
+effectsStdErr <-
 function (reg) 
 {
     if ((class(reg) != "lm") && (class(reg) != "nls")) {
@@ -6,8 +6,8 @@ function (reg)
     }
     summary.effects <- summary(reg)
     aliased <- summary.effects$aliased
-    pvalues <- rep("NA", length(aliased))
-    pvalues[!aliased] <- summary.effects$coefficients[, "Pr(>|t|)"]
-    pvalues[pvalues == "NA"] <- NA
-    return(as.numeric(pvalues))
+    stderr <- rep("NA", length(aliased))
+    stderr[!aliased] <- summary.effects$coefficients[, "Std. Error"]
+    stderr[stderr == "NA"] <- NA
+    return(as.numeric(stderr))
 }

@@ -13,7 +13,7 @@ function (noia.multilinear)
     d <- effectsNames[3]
     e <- effectsNames[4]
     meff <- noia.multilinear$E
-    mstd <- noia.multilinear$std.dev
+    mstd <- noia.multilinear$std.err
     nloc <- noia.multilinear$nloc
     ans.effects <- rep(0, 3^nloc)
     ans.stderr <- rep(0, 3^nloc)

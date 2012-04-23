@@ -2,11 +2,11 @@ Package: noia
 Type: Package
 Title: Implementation of the Natural and Orthogonal InterAction (NOIA)
         model
-Version: 0.94.1
-Date: 2010-04-20
-Author: Arnaud Le Rouzic (2007-2010), Arne B. Gjuvsland (2010)
-Maintainer: Arnaud Le Rouzic <a.p.s.lerouzic@bio.uio.no>, Arne B.
-        Gjuvsland <arne.gjuvsland@umb.no>
+Version: 0.96
+Date: 2012-04-23
+Author: Arnaud Le Rouzic (2007-2010), Arne B. Gjuvsland (2010), Olivier
+        Ariste (2010)
+Maintainer: Arnaud Le Rouzic <lerouzic@legs.cnrs-gif.fr>
 Depends: stats
 Description: The NOIA model, as described extensively in Alvarez-Castro
         & Carlborg (2007), is a framework facilitating the estimation
@@ -27,6 +27,6 @@ Scientists: please be aware that the fact that this program is released
         mention the fashion in which this software was used, including
         the version number, with a citation to the literature, in the
         Methods section.
-Packaged: 2010-04-20 12:24:30 UTC; lerouzic
+Packaged: 2012-04-23 12:35:10 UTC; lerouzic
 Repository: CRAN
-Date/Publication: 2010-04-20 13:56:44
+Date/Publication: 2012-04-23 15:34:55

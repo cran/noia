@@ -11,9 +11,9 @@ function (obj, reference = "P1", ref.genotype = NULL)
         new.smat <- new.smat[colnames(obj$smat), ]
         T <- new.smat %*% obj$smat
         effects <- T %*% obj$E
-        std.err <- sqrt((T * T) %*% (obj$std.dev * obj$std.dev))
+        std.err <- sqrt((T * T) %*% (obj$std.err * obj$std.err))
         ans <- cbind(effects, std.err)
-        colnames(ans) <- c("Effects", "Std.dev")
+        colnames(ans) <- c("Effects", "Std.err")
         return(ans)
     }
     else if (class(obj) == "noia.multilinear") {

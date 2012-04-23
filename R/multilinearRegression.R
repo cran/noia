@@ -117,27 +117,27 @@ function (phen, gen = NULL, genZ = NULL, reference = "noia",
             ...)
         ans <- prep
         ans$E <- coef(regression)
-        ans$std.dev <- summary(regression)$coef[, 2]
+        ans$std.err <- summary(regression)$coef[, 2]
         ans$pvalues <- summary(regression)$coef[, 4]
         if (e.unique) {
             ee <- ans$E["ee"]
-            ss <- ans$std.dev["ee"]
+            ss <- ans$std.err["ee"]
             pp <- ans$pvalues["ee"]
             ans$E <- ans$E[names(ans$E) != "ee"]
-            ans$std.dev <- ans$std.dev[names(ans$std.dev) != 
+            ans$std.err <- ans$std.err[names(ans$std.err) != 
                 "ee"]
             ans$pvalues <- ans$pvalues[names(ans$pvalues) != 
                 "ee"]
             for (i in 1:(prep$nloc - 1)) {
                 for (j in (i + 1):prep$nloc) {
                   ans$E[paste("e", i, j, sep = "")] <- ee
-                  ans$std.dev[paste("e", i, j, sep = "")] <- ss
+                  ans$std.err[paste("e", i, j, sep = "")] <- ss
                   ans$pvalues[paste("e", i, j, sep = "")] <- pp
                 }
             }
         }
         names(ans$E) <- nn
-        names(ans$std.dev) <- nn
+        names(ans$std.err) <- nn
         ans$resvar <- var(residuals(regression)) * (length(residuals(regression)) - 
             1)/length(residuals(regression))
         names(ans$pvalues) <- nn
