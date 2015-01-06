@@ -5,13 +5,8 @@ function (noia.linear, max.level = 2, max.dom = 2, e.unique = FALSE,
     if (class(noia.linear) != "noia.linear") {
         stop("Object of class \"noia.linear\" expected\n")
     }
-    if (!exists("effectsNames")) {
-        effectsNames <- NULL
-        rm(effectsNames)
-        data(effectsNames, package = "noia")
-    }
-    a <- effectsNames[2]
-    d <- effectsNames[3]
+    a <- noia::effectsNames[2]
+    d <- noia::effectsNames[3]
     ans <- list()
     nloc <- noia.linear$nloc
     effects <- noia.linear$E

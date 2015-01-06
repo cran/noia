@@ -17,7 +17,7 @@ function (gmap, reference = "F2", freqmat = NULL, max.level = NULL,
         return(vector)
     }
     gmap <- as.matrix(gmap)
-    nloci <- log(length(gmap), 3)
+    nloci <- round(log(length(gmap), 3))
     if (is.null(S_full)) {
         if (is.null(max.level) && nloci <= 8) {
             S_full = TRUE

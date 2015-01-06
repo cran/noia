@@ -1,13 +1,8 @@
 statusMaxLevel <-
 function (effect, max.level = NULL) 
 {
-    if (!exists("effectsNames")) {
-        effectsNames <- NULL
-        rm(effectsNames)
-        data(effectsNames, package = "noia")
-    }
     if (!is.null(max.level) && nchar(effect) > max.level) {
-        if (sum(strsplit(effect, "")[[1]] != effectsNames[1]) > 
+        if (sum(strsplit(effect, "")[[1]] != noia::effectsNames[1]) > 
             max.level) 
             return(FALSE)
     }

@@ -1,13 +1,8 @@
 formulaMultilinear <-
 function (nloc = 2, max.level = 2, max.dom = 2, e.unique = FALSE) 
 {
-    if (!exists("effectsNames")) {
-        effectsNames <- NULL
-        rm(effectsNames)
-        data(effectsNames, package = "noia")
-    }
-    a <- effectsNames[2]
-    d <- effectsNames[3]
+    a <- noia::effectsNames[2]
+    d <- noia::effectsNames[3]
     f <- paste("phen ~ X[[\"", effNames(nloc = nloc), "\"]]*R", 
         sep = "")
     for (l1 in 1:nloc) {

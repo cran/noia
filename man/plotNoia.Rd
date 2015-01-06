@@ -12,8 +12,10 @@
   } 
 
 \usage{
-\method{plot}{noia.linear}(x, loc = 1:x$nloc, effect=TRUE, epistasis = TRUE, ylim=range(GPmap(x)[,1]) + c(-1,1)*max(GPmap(x)[,2]), ...)
-\method{barplot}{noia.gpmap}(height, GPcol = c("indianred", "palegreen", "royalblue"), arrowscol = "purple", stderr = TRUE , main=NA, ylab=NA, ...)
+\method{plot}{noia.linear}(x, loc = 1:x$nloc, effect=TRUE, epistasis = TRUE, 
+ylim=range(GPmap(x)[,1]) + c(-1,1)*max(GPmap(x)[,2]), ...)
+\method{barplot}{noia.gpmap}(height, GPcol = c("indianred", "palegreen", "royalblue"), 
+arrowscol = "purple", stderr = TRUE , main=NA, ylab=NA, ...)
 }
 
 \arguments{

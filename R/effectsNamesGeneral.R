@@ -5,12 +5,7 @@ function (nloc = 2, max.level = NULL, max.dom = NULL)
         sapply(lapply(strsplit(ss, character(0)), rev), paste, 
             collapse = "")
     }
-    if (!exists("effectsNames")) {
-        effectsNames <- NULL
-        rm(effectsNames)
-        data(effectsNames, package = "noia")
-    }
-    ebase <- effectsNames[1:3]
+    ebase <- noia::effectsNames[1:3]
     enames <- ebase
     if (nloc > 1) {
         for (i in 1:(nloc - 1)) {

@@ -1,5 +1,6 @@
 freqmat2Sgenofreqloc <-
-function (reference = "F2", i = NULL, freqmat = NULL, sinv = TRUE) 
+function (reference = "F2", i = NULL, freqmat = NULL, sinv = TRUE, 
+    tol = 1e-08) 
 {
     ans <- NULL
     if (reference == "F2") {
@@ -31,7 +32,7 @@ function (reference = "F2", i = NULL, freqmat = NULL, sinv = TRUE)
             stop("freqmat and i needed for noia model")
         }
         f <- freqmat[i, ]
-        if (sum(f) != 1) {
+        if (abs(sum(f) - 1) > tol) {
             stop(paste("frequencies for locus", as.character(i), 
                 "do not add up to 1 ([", as.character(f[1]), 
                 as.character(f[2]), as.character(f[3]), "])"))

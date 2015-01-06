@@ -4,7 +4,7 @@ function (x, loc = 1:x$nloc, effect = TRUE, epistasis = TRUE,
     ...) 
 {
     l <- length(loc)
-    par(mfrow = c(l, l), mar = c(1.3, 1.5, 1.3, 1))
+    op <- par(mfrow = c(l, l), mar = c(1.3, 1.5, 1.3, 1))
     for (j in loc) {
         for (i in loc) {
             if (i != j && epistasis) {
@@ -15,4 +15,5 @@ function (x, loc = 1:x$nloc, effect = TRUE, epistasis = TRUE,
             }
         }
     }
+    par(op)
 }

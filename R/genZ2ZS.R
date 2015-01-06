@@ -6,16 +6,6 @@ function (genZ, reference = "F2", max.level = NULL, max.dom = NULL,
         sapply(lapply(strsplit(ss, character(0)), rev), paste, 
             collapse = "")
     }
-    if (!exists("genotypesNames")) {
-        genotypesNames <- NULL
-        rm(genotypesNames)
-        data(genotypesNames, package = "noia")
-    }
-    if (!exists("effectsNames")) {
-        effectsNames <- NULL
-        rm(effectsNames)
-        data(effectsNames, package = "noia")
-    }
     ans <- list()
     N <- nrow(genZ)
     ans$smat <- 1
@@ -32,24 +22,23 @@ function (genZ, reference = "F2", max.level = NULL, max.dom = NULL,
         ans$smat <- kronecker(Sloc(reference = reference, l, 
             genZ), ans$smat)
         if (is.null(eff)) {
-            colnames(ans$smat) <- effectsNames[1:3]
+            colnames(ans$smat) <- noia::effectsNames[1:3]
         }
         else {
-            colnames(ans$smat) <- strrev(kronecker(effectsNames[1:3], 
+            colnames(ans$smat) <- strrev(kronecker(noia::effectsNames[1:3], 
                 strrev(eff), "paste", sep = ""))
         }
         if (is.null(geno)) {
-            colnames(ans$zmat) <- genotypesNames
+            colnames(ans$zmat) <- noia::genotypesNames
         }
         else {
-            colnames(ans$zmat) <- strrev(kronecker(genotypesNames, 
+            colnames(ans$zmat) <- strrev(kronecker(noia::genotypesNames, 
                 strrev(geno), "paste", sep = ""))
         }
         rownames(ans$smat) <- colnames(ans$zmat)
         useful.effects <- effectsSelect(nloc = nloc, max.level = max.level, 
             max.dom = max.dom, effects = colnames(ans$smat))
-        useful.genotypes <- colnames(ans$zmat)[apply(ans$zmat, 
-            2, sum) > threshold]
+        useful.genotypes <- colnames(ans$zmat)
         ans$smat <- ans$smat[useful.genotypes, useful.effects]
         ans$zmat <- ans$zmat[, useful.genotypes]
     }

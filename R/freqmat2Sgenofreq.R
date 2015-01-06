@@ -5,16 +5,6 @@ function (nloc, reference = "F2", freqmat = NULL, sinv = TRUE)
         sapply(lapply(strsplit(ss, character(0)), rev), paste, 
             collapse = "")
     }
-    if (!exists("genotypesNames")) {
-        genotypesNames <- NULL
-        rm(genotypesNames)
-        data(genotypesNames, package = "noia")
-    }
-    if (!exists("effectsNames")) {
-        effectsNames <- NULL
-        rm(effectsNames)
-        data(effectsNames, package = "noia")
-    }
     ans <- list()
     ans$smat <- 1
     if (sinv) {
@@ -32,21 +22,25 @@ function (nloc, reference = "F2", freqmat = NULL, sinv = TRUE)
             ans$sinv <- kronecker(loc$sinv, ans$sinv)
         }
         if (is.null(eff)) {
-            colnames(ans$smat) <- effectsNames[1:3]
+            colnames(ans$smat) <- noia::effectsNames[1:3]
         }
         else {
-            colnames(ans$smat) <- strrev(kronecker(effectsNames[1:3], 
+            colnames(ans$smat) <- strrev(kronecker(noia::effectsNames[1:3], 
                 strrev(eff), "paste", sep = ""))
         }
         if (is.null(geno)) {
-            rownames(ans$smat) <- genotypesNames
+            rownames(ans$smat) <- noia::genotypesNames
         }
         else {
-            rownames(ans$smat) <- strrev(kronecker(genotypesNames, 
+            rownames(ans$smat) <- strrev(kronecker(noia::genotypesNames, 
                 strrev(geno), "paste", sep = ""))
         }
         ans$genofreq <- kronecker(loc$genofreq, ans$genofreq)
         ans$genofreqloc <- rbind(ans$genofreqloc, loc$genofreq)
     }
+    colnames(ans$sinv) <- rownames(ans$smat)
+    rownames(ans$sinv) <- colnames(ans$smat)
+    colnames(ans$genofreqloc) <- noia::genotypesNames
+    colnames(ans$genofreq) <- colnames(sinv)
     return(ans)
 }

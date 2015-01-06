@@ -56,8 +56,8 @@ function (nloc = 1, type = "F2", freqmat = NULL)
             }
         }
         else if (type == "noia") {
-            if (is.numeric(freqmat) && dim(freqmat) == c(nloc, 
-                3)) {
+            if (is.numeric(freqmat) && all(dim(freqmat) == c(nloc, 
+                3))) {
                 if (r < freqmat[l, 1]) {
                   g <- "1"
                 }

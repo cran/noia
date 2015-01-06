@@ -4,14 +4,9 @@ function (noia.multilinear, max.level = 2, max.dom = 2, e.unique = FALSE)
     if (class(noia.multilinear) != "noia.multilinear") {
         stop("Object of class \"noia.multilinear\" expected\n")
     }
-    if (!exists("effectsNames")) {
-        effectsNames <- NULL
-        rm(effectsNames)
-        data(effectsNames, package = "noia")
-    }
-    a <- effectsNames[2]
-    d <- effectsNames[3]
-    e <- effectsNames[4]
+    a <- noia::effectsNames[2]
+    d <- noia::effectsNames[3]
+    e <- noia::effectsNames[4]
     ans <- list()
     nloc <- noia.multilinear$nloc
     effects <- noia.multilinear$E

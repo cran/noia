@@ -1,12 +1,7 @@
 partialX <-
 function (genZ, reference = "F2", effect) 
 {
-    if (!exists("effectsNames")) {
-        effectsNames <- NULL
-        rm(effectsNames)
-        data(effectsNames, package = "noia")
-    }
-    loci <- which(strsplit(effect, "")[[1]] != effectsNames[1])
+    loci <- which(strsplit(effect, "")[[1]] != noia::effectsNames[1])
     if (length(loci) == 0) {
         loci <- 1
         ans <- matrix(rep(1, nrow(genZ)), dimnames = list(NULL, 

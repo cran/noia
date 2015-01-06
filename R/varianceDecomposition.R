@@ -1,11 +1,6 @@
 varianceDecomposition <-
 function (obj) 
 {
-    if (!exists("effectsNames")) {
-        effectsNames <- NULL
-        rm(effectsNames)
-        data(effectsNames, package = "noia")
-    }
     ans <- list()
     if (class(obj) == "noia.linear" || class(obj) == "noia.linear.gpmap" || 
         class(obj) == "noia.multilinear") {
@@ -16,11 +11,11 @@ function (obj)
             n.e <- c(0, 0, 0)
         }
         else {
-            n.a <- apply(sapply(strsplit(n, ""), "c") == effectsNames[2], 
+            n.a <- apply(sapply(strsplit(n, ""), "c") == noia::effectsNames[2], 
                 2, "sum")
-            n.d <- apply(sapply(strsplit(n, ""), "c") == effectsNames[3], 
+            n.d <- apply(sapply(strsplit(n, ""), "c") == noia::effectsNames[3], 
                 2, "sum")
-            n.e <- apply(sapply(strsplit(n, ""), "c") == effectsNames[4], 
+            n.e <- apply(sapply(strsplit(n, ""), "c") == noia::effectsNames[4], 
                 2, "sum")
         }
         for (lev in 1:(obj$nloc)) {

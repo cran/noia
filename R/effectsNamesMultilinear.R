@@ -1,14 +1,9 @@
 effectsNamesMultilinear <-
 function (nloc = 2, max.level = 2, max.dom = 2) 
 {
-    if (!exists("effectsNames")) {
-        effectsNames <- NULL
-        rm(effectsNames)
-        data(effectsNames, package = "noia")
-    }
-    a <- effectsNames[2]
-    d <- effectsNames[3]
-    e <- effectsNames[4]
+    a <- noia::effectsNames[2]
+    d <- noia::effectsNames[3]
+    e <- noia::effectsNames[4]
     ans <- NULL
     ans <- c(ans, effNames(nloc = nloc))
     if ((nloc > 0) && (max.level > 0)) {

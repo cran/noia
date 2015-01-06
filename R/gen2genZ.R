@@ -1,16 +1,11 @@
 gen2genZ <-
 function (gen) 
 {
-    if (!exists("genotypesNames")) {
-        genotypesNames <- NULL
-        rm(genotypesNames)
-        data(genotypesNames, package = "noia")
-    }
     ans <- NULL
     n.gen <- apply(!is.na(gen), 2, "sum")
-    freqs <- rbind(apply(gen == genotypesNames[1], 2, "sum", 
-        na.rm = TRUE)/n.gen, apply(gen == genotypesNames[2], 
-        2, "sum", na.rm = TRUE)/n.gen, apply(gen == genotypesNames[3], 
+    freqs <- rbind(apply(gen == noia::genotypesNames[1], 2, "sum", 
+        na.rm = TRUE)/n.gen, apply(gen == noia::genotypesNames[2], 
+        2, "sum", na.rm = TRUE)/n.gen, apply(gen == noia::genotypesNames[3], 
         2, "sum", na.rm = TRUE)/n.gen)
     for (c in 1:(ncol(gen))) {
         tmp <- NULL
@@ -19,13 +14,13 @@ function (gen)
             if (is.na(g)) {
                 t <- c(freqs[1, c], freqs[2, c], freqs[3, c])
             }
-            else if (g == genotypesNames[1]) {
+            else if (g == noia::genotypesNames[1]) {
                 t <- c(1, 0, 0)
             }
-            else if (g == genotypesNames[2]) {
+            else if (g == noia::genotypesNames[2]) {
                 t <- c(0, 1, 0)
             }
-            else if (g == genotypesNames[3]) {
+            else if (g == noia::genotypesNames[3]) {
                 t <- c(0, 0, 1)
             }
             else {
@@ -38,7 +33,7 @@ function (gen)
     rownames(ans) <- rownames(gen)
     n <- NULL
     for (l in colnames(gen)) {
-        n <- c(n, paste(l, genotypesNames, sep = "-"))
+        n <- c(n, paste(l, noia::genotypesNames, sep = "-"))
     }
     colnames(ans) <- n
     return(ans)
